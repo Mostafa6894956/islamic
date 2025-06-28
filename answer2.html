@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الإجابة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lateef&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563EB;
+            --secondary-color: #DC2626;
+            --accent-color: #1E40AF;
+            --bg-color: #FFFFFF;
+            --text-color: #1E3A8A;
+            --card-bg: #EBF8FF;
+            --border-color: #DBEAFE;
+            --button-text: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Amiri', serif;
+            background: var(--card-bg);
+            color: var(--text-color);
+            min-height: 100vh;
+            font-size: 1.3rem;
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-title {
+            font-family: 'El Messiri', sans-serif;
+            font-size: 2.8rem;
+            color: var(--primary-color);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .main-title::after {
+            content: '';
+            position: absolute;
+            right: 50%;
+            bottom: 0;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transform: translateX(50%);
+            border-radius: 2px;
+        }
+
+        .quran-verse {
+            font-family: 'Amiri', serif;
+            font-size: 1.7rem;
+            color: var(--primary-color);
+            background: var(--bg-color);
+            border-radius: 20px;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-left: 8px solid var(--primary-color);
+            border-right: 8px solid var(--primary-color);
+            padding: 2rem;
+            position: relative;
+            line-height: 2.5;
+        }
+
+        .quran-verse .tashkeel {
+            color: inherit !important;
+        }
+
+        .hadith {
+            font-family: 'Amiri', serif;
+            font-size: 1.7rem;
+            color: var(--secondary-color);
+            background: var(--bg-color);
+            border-radius: 20px;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-left: 8px solid var(--secondary-color);
+            border-right: 8px solid var(--secondary-color);
+            padding: 2rem;
+            position: relative;
+            line-height: 2.2;
+        }
+
+        .hadith .tashkeel {
+            color: inherit !important;
+        }
+
+        .advice {
+            background: var(--bg-color);
+            border-radius: 20px;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            border-left: 8px solid var(--accent-color);
+        }
+
+        .advice-title {
+            font-family: 'El Messiri', sans-serif;
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .advice-title::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: -0.5rem;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+            border-radius: 2px;
+        }
+
+        .advice-content {
+            font-size: 1.2rem;
+            color: #1E3A8A;
+            line-height: 1.6;
+            margin-top: 1rem;
+        }
+
+        .advice-content .highlight {
+            font-size: 1.1rem;
+            padding: 0.2rem 0.4rem;
+            margin: 0.2rem 0;
+            background-color: #E1EFFE;
+            display: inline;
+            font-weight: normal;
+            border-radius: 0.25rem;
+            color: #1E3A8A;
+        }
+
+        .encouragement {
+            background: var(--bg-color);
+            border-radius: 20px;
+            font-size: 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            border-left: 8px solid #F59E0B;
+            border-right: 8px solid #F59E0B;
+        }
+
+        .encouragement:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .sub-title {
+            font-family: 'El Messiri', sans-serif;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin: 2rem 0 1.5rem;
+            position: relative;
+        }
+
+        .sub-title::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: -0.5rem;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .highlight {
+            font-family: 'Amiri', serif;
+            font-size: 1.3rem;
+            color: var(--accent-color);
+            margin: 0.5rem 0;
+            font-weight: normal;
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            background-color: #F3F4F6;
+            border-radius: 0.25rem;
+        }
+
+        .scrollable-section {
+            max-height: calc(100vh - 95px);
+            overflow-y: auto;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        #loading {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        #loading .fa-spinner {
+            font-size: 4rem;
+            color: var(--primary-color);
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        #loading p {
+            font-family: 'El Messiri', sans-serif;
+            font-size: 1.8rem;
+            margin-top: 1.5rem;
+            color: var(--primary-color);
+        }
+        .btn-primary {
+            background: var(--secondary-color);
+            color: var(--button-text);
+            padding: 1rem;
+            border-radius: 0.75rem;
+            font-size: 1.3rem;
+            width: 100%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        button {
+            transition: transform 0.1s ease;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+    </style>
+</head>
+<body class="p-4 md:p-8">
+    
+    <h1 class="text-4xl font-bold text-center text-teal-700 mb-8">الاجابة</h1>
+    <div class="scrollable-section">
+        <div id="answerContainer" class="space-y-3">
+            <div id="loading" class="text-center py-8">
+                <i class="fas fa-spinner fa-spin text-3xl text-teal-700"></i>
+                <p class="mt-4 text-teal-700">جارٍ تحميل الإجابة...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- زر الرجوع -->
+    
+
+    <script>
+        const question = decodeURIComponent(window.location.search.split('=')[1]);
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyC3MJMChWkFlinTfK3LWUYoaNL_qSRTbzU`;
+
+        const prompt = `أنا أعاني من مشكلة أو حالة معينة وأريد مساعدتك في فهمها وتقديم إجابة مناسبة بناءً على القرآن والسنة. إليك وصف حالتي:
+
+${question}
+
+**تعليمات للإجابة:**
+1. ابدأ بتحليل الحالة أو المشكلة المذكورة.
+2. استخدم آية قرآنية أو حديث نبوي شريف يتناسب مع الحالة. واذا امكن اذكر كليهما
+3. قدم شرحًا مبسطًا للآية أو الحديث وربطه بالحالة.
+4. قدم نصائح عملية وتوجيهات إيمانية تساعد في التعامل مع الحالة.
+5. ختم الإجابة بكلمات تشجيعية وتبث الأمل.
+
+**علامات التنسيق:**
+- للآيات القرآنية: استخدم ## قبل وبعد النص.
+- للأحاديث النبوية: استخدم @@ قبل وبعد النص.
+- للعناوين الرئيسية: استخدم **العنوان**.
+
+- للنصائح: استخدم - قبل النص و استخدم - بعد النص.
+- للكلمات التشجيعية: استخدم !! قبل وبعد النص.
+
+**ملاحظات مهمة:**
+- تأكد من أن الآية القرآنية مكتوبة بخط يشبه المصحف.
+- تأكد من أن النصوص محاذاة إلى اليمين.
+- استخدم لغة عربية فصيحة وواضحة.
+-لا تكتب العلامة دي * في الايات القرانية
+-اذا هكتب كذا نصحيه استخدم % % بين كل نصيحه
+-حاول كل حاجه جديد يعني لو هتبدا في نصحيه جديده او هتغير الموضوع او هتنتقل من شرح القران الي الحديث او هتبدا في موضوع فرعي جديد ابدء في سطر جديد عن طريق كتابة % %`;
+
+        // دالة للتحقق من وجود إجابة سابقة
+        function checkForPreviousAnswer(question) {
+            let savedAnswers;
+            try {
+                savedAnswers = JSON.parse(localStorage.getItem('answers')) || [];
+            } catch (e) {
+                savedAnswers = []; // إذا كان هناك خطأ في التحليل، نعيد تهيئة المصفوفة
+            }
+            // التحقق من أن savedAnswers مصفوفة
+            if (!Array.isArray(savedAnswers)) {
+                savedAnswers = []; // إعادة تهيئة كصفوفة فارغة
+                localStorage.setItem('answers', JSON.stringify(savedAnswers));
+            }
+            const previousAnswer = savedAnswers.find(ans => ans.question === question);
+            return previousAnswer ? previousAnswer.answer : null;
+        }
+
+        // دالة لحفظ الإجابة الجديدة
+        function saveAnswer(question, answer) {
+            let savedAnswers;
+            try {
+                savedAnswers = JSON.parse(localStorage.getItem('answers')) || [];
+            } catch (e) {
+                savedAnswers = []; // إذا كان هناك خطأ في التحليل، نعيد تهيئة المصفوفة
+            }
+            // التحقق من أن savedAnswers مصفوفة
+            if (!Array.isArray(savedAnswers)) {
+                savedAnswers = []; // إعادة تهيئة كصفوفة فارغة
+            }
+            savedAnswers.push({ question, answer });
+            localStorage.setItem('answers', JSON.stringify(savedAnswers));
+        }
+
+        const maxRetries = 3; // عدد المحاولات
+        let retryCount = 0;
+
+        async function getAnswer() {
+            try {
+                // التحقق من وجود إجابة سابقة
+                const previousAnswer = checkForPreviousAnswer(question);
+                if (previousAnswer) {
+                    document.getElementById('loading').remove();
+                    document.getElementById('answerContainer').innerHTML = `
+                        <div class="answer-content">
+                            ${previousAnswer}
+                        </div>
+                        <hr>
+                        <div>
+                        <button onclick="window.location.href='index.html'" class="btn-primary w-full mt-4">
+            الرجوع 
+        </button>
+    </div>`;
+                    return;
+                }
+
+                // إذا لم تكن هناك إجابة سابقة، جلب إجابة جديدة
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: prompt
+                            }]
+                        }]
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const data = await response.json();
+                const answer = data.candidates[0].content.parts[0].text;
+
+                // تنسيق الإجابة
+                const formattedAnswer = answer
+                    .replace(/%(.*?)%/g, '<br>')
+                    .replace(/##(.*?)##/g, '<div class="quran-verse">$1</div>')
+                    .replace(/@@(.*?)@@/g, '<div class="hadith">$1</div>')
+                    .replace(/##نصيحة##(.*?)##نصيحة##/g, '<div class="advice"><h3 class="advice-title">نصائح</h3><div class="advice-content">$1</div></div>')
+                    .replace(/!!(.*?)!!/g, '<div class="encouragement">$1</div>')
+                    .replace(/\*\*(.*?)\*\*/g, '<h3 class="sub-title">$1</h3>')
+                    .replace(/-(.*?)-/g, '<p class="highlight">$1</p>');
+
+                // حفظ الإجابة الجديدة
+                saveAnswer(question, formattedAnswer);
+
+                // عرض الإجابة
+                document.getElementById('loading').remove();
+                document.getElementById('answerContainer').innerHTML = `
+                    <div class="question-item">
+                        
+                    </div>
+                    <div class="answer-content">
+                        ${formattedAnswer}
+                    </div>
+                    <div class="text-center mt-8">
+                        <button onclick="window.location.href='index.html'" class="btn-primary w-full mt-4">
+            الرجوع 
+        </button>
+                    </div>`;
+            } catch (error) {
+                retryCount++;
+                if (retryCount < maxRetries) {
+                    // إعادة المحاولة بعد 3 ثواني
+                    setTimeout(getAnswer, 3000);
+                } else {
+                    // عرض رسالة الخطأ بعد استنفاذ المحاولات
+                    document.getElementById('loading').innerHTML = `
+                        <div class="error-message text-red-600">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <p>حدث خطأ أثناء جلب الإجابة. الرجاء المحاولة مرة أخرى.</p>
+                            <p class="text-sm text-gray-600 mt-2">تفاصيل الخطأ: ${error.message}</p>
+                            <button onclick="window.location.reload()" class="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition duration-300 mt-4">
+                                <i class="fas fa-redo mr-2"></i> إعادة المحاولة
+                            </button>
+                        </div>`;
+                }
+            }
+        }
+
+        getAnswer();
+    </script>
+</body>
+</html>
