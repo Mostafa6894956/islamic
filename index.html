@@ -1,562 +1,883 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
+<html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QueryVault - خزنة أسئلتك</title>
-    <meta name="google-site-verification" content="VjxjWvvyIrR1CjimFrXtk3obFKeXDNxUugSvNh7BRt4" />
-    <meta name="description" content="QueryVault - خزنة أسئلتك الذكية، حيث تجد إجابات مبنية على الحكمة والمعرفة. احفظ أسئلتك واحصل على إرشادات قيمة لحياتك اليومية." />
-    <meta name="keywords" content="QueryVault, أسئلة, إجابات, حكمة, نصائح, إرشاد, خزنة الأسئلة" />
-    <link rel="icon" type="image/png" href="https://i.ibb.co/fPKqRXk/12-1-2.png">
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>Clear Lungs | Quit Today, Live Tomorrow</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-color: #2563EB;
-            --secondary-color: #DC2626;
-            --accent-color: #1E40AF;
-            --bg-color: #FFFFFF;
-            --text-color: #1E3A8A;
-            --card-bg: #EBF8FF;
-            --border-color: #DBEAFE;
-            --button-text: #FFFFFF;
-        }
-
         body {
-            font-family: 'Amiri', serif;
-            background: var(--card-bg);
-            color: var(--text-color);
-            min-height: 100vh;
-            overflow: hidden;
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
         }
-
-        .glass-effect {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            border: 1px solid var(--border-color);
+        .hero-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%2303A9F4' opacity='0.2'/%3E%3Cpath d='M400 150 C 350 200, 300 250, 250 300 C 200 350, 150 400, 200 450 C 250 500, 350 500, 400 450 C 450 500, 550 500, 600 450 C 650 400, 600 350, 550 300 C 500 250, 450 200, 400 150 Z' fill='%234CAF50' opacity='0.7'/%3E%3Cpath d='M400 200 C 370 230, 340 260, 310 290 C 280 320, 250 350, 280 380 C 310 410, 370 410, 400 380 C 430 410, 490 410, 520 380 C 550 350, 520 320, 490 290 C 460 260, 430 230, 400 200 Z' fill='white' opacity='0.9'/%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: center;
         }
-
-        .section-title {
-            font-family: 'El Messiri', sans-serif;
-            font-size: 2.2rem;
-            color: var(--primary-color);
-            position: relative;
-            padding-bottom: 0.5rem;
-            margin-bottom: 0rem;
+        .counter-animation {
+            animation: countUp 2s ease-out forwards;
         }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            border-radius: 2px;
+        @keyframes countUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
-        .question-item {
-            background: var(--card-bg);
-            padding: 1.2rem;
-            border-radius: 0.8rem;
-            margin: 0.8rem 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            border-left: 3px solid var(--primary-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1rem;
-            transition: all 0.2s ease;
+        .quiz-card {
+            transition: all 0.3s ease;
         }
-
-        .question-item:active {
-            transform: scale(0.98);
-            opacity: 0.9;
-            background: rgba(37, 99, 235, 0.05);
+        .quiz-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
         }
-
-        .question-text {
-            flex: 1;
-            font-size: 1.1rem;
-            color: var(--text-color);
+        .testimonial-card {
+            transition: all 0.3s ease;
         }
-
-        .delete-btn {
-            background: var(--secondary-color);
-            color: var(--button-text);
-            width: 2.5rem;
-            height: 2.5rem;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: none;
-            cursor: pointer;
-            transition: opacity 0.2s ease;
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
         }
-
-        .delete-btn i {
-            font-size: 1rem;
+        .resource-card {
+            transition: all 0.3s ease;
         }
-
-        .delete-btn:active {
-            opacity: 0.8;
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
         }
-
-        .empty-state {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-color);
-            opacity: 0.7;
+        .stat-card {
+            transition: all 0.3s ease;
         }
-
-        .empty-state i {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
+        .stat-card:hover {
+            transform: scale(1.03);
         }
-
-        .btn-primary {
-            background: var(--secondary-color);
-            color: var(--button-text);
-            padding: 1rem;
-            border-radius: 0.75rem;
-            font-size: 1.1rem;
-            width: 100%;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
+        .team-member {
+            transition: all 0.3s ease;
         }
-
-        @media (max-width: 480px) {
-            .question-item {
-                padding: 1rem;
-                border-radius: 0.6rem;
-            }
-
-            .question-text {
-                font-size: 1rem;
-            }
-
-            .delete-btn {
-                width: 2.2rem;
-                height: 2.2rem;
-            }
+        .team-member:hover {
+            transform: translateY(-5px);
         }
-
-        /* نافذة التأكيد */
-        .confirmation-modal {
+        /* Code display modal */
+        .modal {
+            display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .confirmation-modal.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .confirmation-box {
-            background: var(--bg-color);
-            padding: 2rem;
-            border-radius: 1rem;
-            text-align: center;
-            max-width: 90%;
-            width: 400px;
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
-        }
-
-        .confirmation-modal.active .confirmation-box {
-            transform: scale(1);
-        }
-
-        .confirmation-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 1.5rem;
-        }
-
-        .confirmation-btn {
-            padding: 0.8rem 1.5rem;
-            border-radius: 0.5rem;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: transform 0.1s ease;
-        }
-
-        .confirmation-btn:active {
-            transform: scale(0.95);
-        }
-
-        .confirm-delete {
-            background: var(--secondary-color);
-            color: var(--button-text);
-        }
-
-        .cancel-delete {
-            background: var(--card-bg);
-            color: var(--text-color);
-        }
-
-        /* تأثيرات الأزرار */
-        button {
-            transition: transform 0.1s ease;
-        }
-
-        button:active {
-            transform: scale(0.95);
-        }
-
-        .fixed-section {
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            padding-bottom: 0.5rem;
-            margin-bottom: 0
-        }
-
-        .questions-container {
-            position: relative;
-            height: calc(80vh - 230px);
-            overflow: hidden;
-        }
-
-        .scrollable-questions {
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            overflow-y: auto;
-            padding: 0 1rem;
-            direction: rtl;
-        }
-
-        .scrollable-questions::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .scrollable-questions::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.05);
-            border-radius: 3px;
-        }
-
-        .scrollable-questions::-webkit-scrollbar-thumb {
-            background: var(--primary-color);
-            border-radius: 3px;
-        }
-
-        .scrollable-questions::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-color);
-        }
-
-        @media (max-width: 480px) {
-            .questions-container {
-                height: calc(100vh - 250px);
-            }
-        }
-
-        .credits-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .credits-modal.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .credits-content {
-            background: var(--bg-color);
-            padding: 2rem;
-            border-radius: 1rem;
-            max-width: 90%;
-            width: 400px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .credits-content h3 {
-            font-family: 'El Messiri', sans-serif;
-            font-size: 1.8rem;
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 0.5rem;
-        }
-
-        .credits-content h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 50%;
-            transform: translateX(50%);
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            border-radius: 2px;
-        }
-
-        .credits-content p {
-            font-size: 1.1rem;
-            color: var(--text-color);
-            margin: 1.5rem 0;
-        }
-
-        .credits-content .close-btn {
-            background: var(--secondary-color);
-            color: var(--button-text);
-            padding: 0.8rem 1.5rem;
-            border-radius: 0.5rem;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        
-
-        .info-icon {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: var(--primary-color);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
             z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7);
         }
-
-        .info-icon:active {
-            transform: scale(0.95);
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 90%;
+            max-width: 1200px;
+            max-height: 80vh;
+            overflow-y: auto;
+            border-radius: 8px;
         }
-        .questions-container12 {
-            background: var(--card-bg);
-        }
-
-        .developer-name {
-            font-family: 'Amiri', serif;
-            font-size: 1.35rem;
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
             font-weight: bold;
-            background: var(--primary-color);    
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            display: inline-block;
-            padding: 0.2rem 0.5rem;
-            border-radius: 0.5rem;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 14px;
+            overflow-x: auto;
+        }
+        .copy-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 99;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: all 0.3s ease;
         }
-
-        
+        .copy-button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
     </style>
-</head>
-<body class="p-4 md:p-8">
-    
-    
-        <div class="fixed-section">
-            <br>
-            <div class="flex items-center justify-center mb-4">
-                <img src="https://i.ibb.co/fPKqRXk/12-1-2.png" alt="QueryVault Logo" class="w-32 h-32">
-            </div>
-            <p class="text-center text-gray-600 mb-6 text-lg">خزنة أسئلتك الذكية - حيث تجد إجابات مبنية على الحكمة والمعرفة</p>
-
-                <div class="mb-8">
-                    <textarea id="questionInput" class="w-full p-4 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="ادخل سؤالك هنا..."></textarea>
-                    <button id="askButton" class="btn-primary w-full mt-4">
-                        <i class="fas fa-paper-plane"></i> إرسال السؤال
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.16 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.container{width:100%}@media (min-width: 640px){.container{max-width:640px}}@media (min-width: 768px){.container{max-width:768px}}@media (min-width: 1024px){.container{max-width:1024px}}@media (min-width: 1280px){.container{max-width:1280px}}@media (min-width: 1536px){.container{max-width:1536px}}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0px}.bottom-0{bottom:0px}.left-0{left:0px}.right-0{right:0px}.z-10{z-index:10}.mx-auto{margin-left:auto;margin-right:auto}.mb-10{margin-bottom:2.5rem}.mb-16{margin-bottom:4rem}.mb-2{margin-bottom:0.5rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.ml-1{margin-left:0.25rem}.ml-2{margin-left:0.5rem}.ml-3{margin-left:0.75rem}.mr-2{margin-right:0.5rem}.mt-12{margin-top:3rem}.mt-16{margin-top:4rem}.mt-8{margin-top:2rem}.mb-1{margin-bottom:0.25rem}.mb-8{margin-bottom:2rem}.mt-0\.5{margin-top:0.125rem}.mt-1{margin-top:0.25rem}.mt-4{margin-top:1rem}.mt-6{margin-top:1.5rem}.block{display:block}.inline-block{display:inline-block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.h-10{height:2.5rem}.h-12{height:3rem}.h-16{height:4rem}.h-20{height:5rem}.h-4{height:1rem}.h-48{height:12rem}.h-5{height:1.25rem}.h-6{height:1.5rem}.h-auto{height:auto}.h-full{height:100%}.h-screen{height:100vh}.h-24{height:6rem}.h-3{height:0.75rem}.h-40{height:10rem}.w-10{width:2.5rem}.w-12{width:3rem}.w-16{width:4rem}.w-20{width:5rem}.w-4{width:1rem}.w-5{width:1.25rem}.w-6{width:1.5rem}.w-auto{width:auto}.w-full{width:100%}.w-24{width:6rem}.max-w-2xl{max-width:42rem}.max-w-3xl{max-width:48rem}.flex-shrink-0{flex-shrink:0}.transform{transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.cursor-pointer{cursor:pointer}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.flex-col{flex-direction:column}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-8{gap:2rem}.gap-6{gap:1.5rem}.space-x-8 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(2rem * var(--tw-space-x-reverse));margin-left:calc(2rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-x-4 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(1rem * var(--tw-space-x-reverse));margin-left:calc(1rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-6 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(1.5rem * var(--tw-space-x-reverse));margin-left:calc(1.5rem * calc(1 - var(--tw-space-x-reverse)))}.overflow-hidden{overflow:hidden}.rounded-2xl{border-radius:1rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-xl{border-radius:0.75rem}.rounded-l-lg{border-top-left-radius:0.5rem;border-bottom-left-radius:0.5rem}.rounded-r-lg{border-top-right-radius:0.5rem;border-bottom-right-radius:0.5rem}.border{border-width:1px}.border-4{border-width:4px}.border-t{border-top-width:1px}.border-gray-200{--tw-border-opacity:1;border-color:rgb(229 231 235 / var(--tw-border-opacity, 1))}.border-white{--tw-border-opacity:1;border-color:rgb(255 255 255 / var(--tw-border-opacity, 1))}.border-gray-700{--tw-border-opacity:1;border-color:rgb(55 65 81 / var(--tw-border-opacity, 1))}.border-opacity-30{--tw-border-opacity:0.3}.bg-gray-100{--tw-bg-opacity:1;background-color:rgb(243 244 246 / var(--tw-bg-opacity, 1))}.bg-blue-100{--tw-bg-opacity:1;background-color:rgb(219 234 254 / var(--tw-bg-opacity, 1))}.bg-blue-50{--tw-bg-opacity:1;background-color:rgb(239 246 255 / var(--tw-bg-opacity, 1))}.bg-blue-500{--tw-bg-opacity:1;background-color:rgb(59 130 246 / var(--tw-bg-opacity, 1))}.bg-gray-200{--tw-bg-opacity:1;background-color:rgb(229 231 235 / var(--tw-bg-opacity, 1))}.bg-gray-50{--tw-bg-opacity:1;background-color:rgb(249 250 251 / var(--tw-bg-opacity, 1))}.bg-green-100{--tw-bg-opacity:1;background-color:rgb(220 252 231 / var(--tw-bg-opacity, 1))}.bg-green-50{--tw-bg-opacity:1;background-color:rgb(240 253 244 / var(--tw-bg-opacity, 1))}.bg-green-500{--tw-bg-opacity:1;background-color:rgb(34 197 94 / var(--tw-bg-opacity, 1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-gray-800{--tw-bg-opacity:1;background-color:rgb(31 41 55 / var(--tw-bg-opacity, 1))}.bg-opacity-10{--tw-bg-opacity:0.1}.bg-opacity-20{--tw-bg-opacity:0.2}.bg-gradient-to-br{background-image:linear-gradient(to bottom right, var(--tw-gradient-stops))}.from-blue-500{--tw-gradient-from:#3b82f6 var(--tw-gradient-from-position);--tw-gradient-to:rgb(59 130 246 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.to-green-500{--tw-gradient-to:#22c55e var(--tw-gradient-to-position)}.p-3{padding:0.75rem}.p-4{padding:1rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.px-8{padding-left:2rem;padding-right:2rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-20{padding-top:5rem;padding-bottom:5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-12{padding-top:3rem;padding-bottom:3rem}.pt-16{padding-top:4rem}.pt-2{padding-top:0.5rem}.pt-8{padding-top:2rem}.text-center{text-align:center}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.font-bold{font-weight:700}.font-medium{font-weight:500}.leading-tight{line-height:1.25}.text-blue-500{--tw-text-opacity:1;color:rgb(59 130 246 / var(--tw-text-opacity, 1))}.text-gray-400{--tw-text-opacity:1;color:rgb(156 163 175 / var(--tw-text-opacity, 1))}.text-gray-600{--tw-text-opacity:1;color:rgb(75 85 99 / var(--tw-text-opacity, 1))}.text-gray-700{--tw-text-opacity:1;color:rgb(55 65 81 / var(--tw-text-opacity, 1))}.text-gray-800{--tw-text-opacity:1;color:rgb(31 41 55 / var(--tw-text-opacity, 1))}.text-green-500{--tw-text-opacity:1;color:rgb(34 197 94 / var(--tw-text-opacity, 1))}.text-green-800{--tw-text-opacity:1;color:rgb(22 101 52 / var(--tw-text-opacity, 1))}.text-red-500{--tw-text-opacity:1;color:rgb(239 68 68 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-green-300{--tw-text-opacity:1;color:rgb(134 239 172 / var(--tw-text-opacity, 1))}.text-opacity-80{--tw-text-opacity:0.8}.placeholder-white::placeholder{--tw-placeholder-opacity:1;color:rgb(255 255 255 / var(--tw-placeholder-opacity, 1))}.placeholder-opacity-70::placeholder{--tw-placeholder-opacity:0.7}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.backdrop-blur-sm{--tw-backdrop-blur:blur(4px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-300{transition-duration:300ms}.hover\:scale-105:hover{--tw-scale-x:1.05;--tw-scale-y:1.05;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:bg-blue-50:hover{--tw-bg-opacity:1;background-color:rgb(239 246 255 / var(--tw-bg-opacity, 1))}.hover\:bg-blue-600:hover{--tw-bg-opacity:1;background-color:rgb(37 99 235 / var(--tw-bg-opacity, 1))}.hover\:bg-gray-300:hover{--tw-bg-opacity:1;background-color:rgb(209 213 219 / var(--tw-bg-opacity, 1))}.hover\:bg-green-600:hover{--tw-bg-opacity:1;background-color:rgb(22 163 74 / var(--tw-bg-opacity, 1))}.hover\:bg-opacity-30:hover{--tw-bg-opacity:0.3}.hover\:bg-opacity-90:hover{--tw-bg-opacity:0.9}.hover\:text-blue-700:hover{--tw-text-opacity:1;color:rgb(29 78 216 / var(--tw-text-opacity, 1))}.hover\:text-green-500:hover{--tw-text-opacity:1;color:rgb(34 197 94 / var(--tw-text-opacity, 1))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.focus\:ring-2:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.focus\:ring-white:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(255 255 255 / var(--tw-ring-opacity, 1))}.focus\:ring-opacity-50:focus{--tw-ring-opacity:0.5}@media (min-width: 768px){.md\:mt-0{margin-top:0px}.md\:flex{display:flex}.md\:hidden{display:none}.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.md\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}.md\:p-12{padding:3rem}.md\:text-2xl{font-size:1.5rem;line-height:2rem}.md\:text-4xl{font-size:2.25rem;line-height:2.5rem}.md\:text-6xl{font-size:3.75rem;line-height:1}}@media (min-width: 1024px){.lg\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}}</style></head>
+<body class="bg-gray-100" data-new-gr-c-s-check-loaded="14.1244.0" data-gr-ext-installed="">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md fixed w-full z-10">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <!-- Logo placeholder - replace with your actual logo -->
+                    <img src="https://i.ibb.co/60ZKykwQ/123456.png" alt="Clear Lungs Logo" class="h-10 w-auto">
+                    <span class="ml-2 text-xl font-bold text-gray-800">Clear Lungs</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#why-quit" class="text-gray-600 hover:text-green-500 transition">Why Quit?</a>
+                    <a href="#stories" class="text-gray-600 hover:text-green-500 transition">Stories</a>
+                    <a href="#first-step" class="text-gray-600 hover:text-green-500 transition">First Step</a>
+                    <a href="#resources" class="text-gray-600 hover:text-green-500 transition">Resources</a>
+                    <a href="#join" class="text-gray-600 hover:text-green-500 transition">Join Us</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-gray-600 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
                     </button>
                 </div>
-                <div class="questions-container12">
-                <h2 class="section-title">أسئلتك السابقة</h2>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
+            <div class="container mx-auto px-4 py-2">
+                <a href="#why-quit" class="block py-2 text-gray-600 hover:text-green-500">Why Quit?</a>
+                <a href="#stories" class="block py-2 text-gray-600 hover:text-green-500">Stories</a>
+                <a href="#first-step" class="block py-2 text-gray-600 hover:text-green-500">First Step</a>
+                <a href="#resources" class="block py-2 text-gray-600 hover:text-green-500">Resources</a>
+                <a href="#join" class="block py-2 text-gray-600 hover:text-green-500">Join Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section h-screen flex items-center justify-center text-center text-white pt-16">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">Quit Today, <br>Live Tomorrow</h1>
+            <p class="text-xl md:text-2xl mb-10 max-w-2xl mx-auto">Take control of your health and join thousands who have chosen a smoke-free life.</p>
+            <a href="#first-step" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 transform hover:scale-105 inline-block">Start Your Journey</a>
+        </div>
+    </section>
+
+    <!-- Why Quit Section -->
+    <section id="why-quit" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Why Quit Smoking?</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Stat Card 1 -->
+                <div class="stat-card bg-blue-50 rounded-xl p-6 text-center">
+                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-10 h-10 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">20 Minutes</h3>
+                    <p class="text-gray-600">After quitting, your heart rate and blood pressure drop to normal levels.</p>
+                </div>
+                
+                <!-- Stat Card 2 -->
+                <div class="stat-card bg-green-50 rounded-xl p-6 text-center">
+                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">1-9 Months</h3>
+                    <p class="text-gray-600">Coughing and shortness of breath decrease; lung function improves.</p>
+                </div>
+                
+                <!-- Stat Card 3 -->
+                <div class="stat-card bg-blue-50 rounded-xl p-6 text-center">
+                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-10 h-10 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">1 Year</h3>
+                    <p class="text-gray-600">Your risk of coronary heart disease is cut in half compared to smokers.</p>
                 </div>
             </div>
-
-            <div class="questions-container">
-                <div class="scrollable-questions" id="questionsList">
-                    <div class="empty-state">
-                        <i class="fas fa-comment-alt"></i>
-                        <p>لا يوجد أسئلة سابقة</p>
+            
+            <div class="mt-16 bg-gray-50 rounded-2xl p-8 md:p-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4">The Hidden Costs of Smoking</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <svg class="w-6 h-6 text-red-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <span>Smoking causes more than 480,000 deaths per year in the United States</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-6 h-6 text-red-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <span>Smokers spend an average of $2,000+ per year on cigarettes</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-6 h-6 text-red-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <span>Smoking damages nearly every organ in your body</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-6 h-6 text-red-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <span>Secondhand smoke exposure causes nearly 41,000 deaths annually</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <svg class="w-full h-auto" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M190,50 C100,50 50,150 50,200 C50,250 100,280 150,250 C200,220 220,200 250,200 C280,200 300,220 350,200 C400,180 350,100 300,100 C250,100 280,50 190,50 Z" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"></path>
+                            <path d="M190,70 C120,70 70,150 70,190 C70,230 100,250 140,230 C180,210 200,190 230,190 C260,190 280,210 320,190 C360,170 320,120 280,120 C240,120 260,70 190,70 Z" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="2"></path>
+                            <path d="M190,90 C140,90 90,150 90,180 C90,210 110,220 130,210 C150,200 180,180 210,180 C240,180 260,200 290,180 C320,160 290,140 260,140 C230,140 240,90 190,90 Z" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="2"></path>
+                            <path d="M190,110 C160,110 110,150 110,170 C110,190 120,190 130,180 C140,170 160,170 190,170 C220,170 240,190 260,170 C280,150 260,160 240,160 C220,160 220,110 190,110 Z" fill="#cbd5e1" stroke="#94a3b8" stroke-width="2"></path>
+                            <path d="M190,130 C170,130 130,150 130,160 C130,170 140,160 150,150 C160,140 170,160 190,160 C210,160 220,180 230,160 C240,140 230,180 220,180 C210,180 210,130 190,130 Z" fill="#94a3b8" stroke="#64748b" stroke-width="2"></path>
+                            <line x1="200" y1="50" x2="200" y2="250" stroke="#ef4444" stroke-width="3" stroke-dasharray="10,5"></line>
+                            <circle cx="200" cy="50" r="5" fill="#ef4444"></circle>
+                            <circle cx="200" cy="250" r="5" fill="#10b981"></circle>
+                            <text x="210" y="60" font-size="12" fill="#ef4444">Damaged</text>
+                            <text x="210" y="245" font-size="12" fill="#10b981">Healthy</text>
+                        </svg>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- نافذة التأكيد -->
-    <div class="confirmation-modal">
-        <div class="confirmation-box">
-            <h3 class="text-xl font-bold mb-4">هل أنت متأكد من الحذف؟</h3>
-            <div class="confirmation-buttons">
-                <button class="confirmation-btn confirm-delete">نعم، احذف</button>
-                <button class="confirmation-btn cancel-delete">إلغاء</button>
+    <!-- Stories of Change Section -->
+    <section id="stories" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Stories of Change</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="h-48 bg-blue-500 relative">
+                        <svg class="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                            <path d="M0,0 L100,0 L100,80 C75,100 50,90 0,100 Z" fill="#03A9F4"></path>
+                        </svg>
+                        <div class="absolute bottom-0 left-0 right-0 p-6">
+                            <div class="w-16 h-16 bg-white rounded-full border-4 border-white shadow-lg overflow-hidden">
+                                <svg class="w-full h-full text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Michael, 32</h3>
+                        <p class="text-gray-600 mb-4">Smoke-free for 2 years</p>
+                        <p class="text-gray-700">"After smoking for 15 years, I finally quit when my daughter was born. The first month was tough, but now I can run with my kid without getting winded. My sense of taste and smell returned, and I've saved enough money to take my family on vacation."</p>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="h-48 bg-green-500 relative">
+                        <svg class="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                            <path d="M0,0 L100,0 L100,80 C75,100 50,90 0,100 Z" fill="#4CAF50"></path>
+                        </svg>
+                        <div class="absolute bottom-0 left-0 right-0 p-6">
+                            <div class="w-16 h-16 bg-white rounded-full border-4 border-white shadow-lg overflow-hidden">
+                                <svg class="w-full h-full text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Sarah, 28</h3>
+                        <p class="text-gray-600 mb-4">Smoke-free for 1 year</p>
+                        <p class="text-gray-700">"I started smoking in college due to stress. After multiple failed attempts, I finally quit using nicotine patches and support from friends. My anxiety has decreased, my skin looks better, and I no longer feel controlled by cigarettes."</p>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="h-48 bg-blue-500 relative">
+                        <svg class="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                            <path d="M0,0 L100,0 L100,80 C75,100 50,90 0,100 Z" fill="#03A9F4"></path>
+                        </svg>
+                        <div class="absolute bottom-0 left-0 right-0 p-6">
+                            <div class="w-16 h-16 bg-white rounded-full border-4 border-white shadow-lg overflow-hidden">
+                                <svg class="w-full h-full text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">David, 45</h3>
+                        <p class="text-gray-600 mb-4">Smoke-free for 5 years</p>
+                        <p class="text-gray-700">"After a health scare, I quit cold turkey. It was the hardest thing I've ever done, but also the most rewarding. I've regained my stamina, and my doctor says my lung function has improved dramatically. I wish I'd done it sooner."</p>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </section>
+
+    <!-- Take the First Step Section -->
+    <section id="first-step" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Take the First Step</h2>
+            
+            <div class="max-w-3xl mx-auto bg-gray-50 rounded-2xl p-8 shadow-md">
+                <h3 class="text-2xl font-bold mb-6 text-center">Smoking Habit Quiz</h3>
+                
+                <div id="quiz-container">
+                    <div id="question-1" class="quiz-question">
+                        <p class="text-lg font-medium mb-4">1. How many cigarettes do you smoke per day?</p>
+                        <div class="space-y-3">
+                            <label class="flex items-center p-3 bg-white rounded-lg border border-gray-200 cursor-pointer hover:bg-blue-50 transition">
+                                <input type="radio" name="q1" value="1" class="h-5 w-5 text-blue-500">
+                                <span class="ml-3">Less than 5</span>
+                            </label>
+                            <label class="flex items-center p-3 bg-white rounded-lg border border-gray-200 cursor-pointer hover:bg-blue-50 transition">
+                                <input type="radio" name="q1" value="2" class="h-5 w-5 text-blue-500">
+                                <span class="ml-3">5-10</span>
+                            </label>
+                            <label class="flex items-center p-3 bg-white rounded-lg border border-gray-200 cursor-pointer hover:bg-blue-50 transition">
+                                <input type="radio" name="q1" value="3" class="h-5 w-5 text-blue-500">
+                                <span class="ml-3">11-20</span>
+                            </label>
+                            <label class="flex items-center p-3 bg-white rounded-lg border border-gray-200 cursor-pointer hover:bg-blue-50 transition">
+                                <input type="radio" name="q1" value="4" class="h-5 w-5 text-blue-500">
+                                <span class="ml-3">More than 20</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div id="question-2" class="quiz-question hidden">
+                        <p class="text-lg font-medium mb-4">2. How soon after waking up do you smoke your first cigarette?</p>
+                        <div class="space-y-3">
+                            <label class="flex items-center p-3 bg-white rounded-lg border border-gray-200 cursor-pointer hover:bg-blue-50 transition">
+                                <input type="radio" name="q2" value="1" class="h-5 w-5 text-blue-500">
+                                <span class="ml-3">After 60 minutes</span>
+                            </label>
+                            <label class="flex items-center p-3 bg-white rounded-lg border border-gray-200 cursor-pointer hover:bg-blue-50 transition">
+                                <input type="radio" name="q2" value="2" class="h-5 w-5 text-blue-500">
+                                <span class="ml-3">31-60 minutes</span>
+                            </label>
+                            <label class="flex items-center p-3 bg-white rounded-lg border border-gray-200 cursor-pointer hover:bg-blue-50 transition">
+                                <input type="radio" name="q2" value="3" class="h-5 w-5 text-blue-500">
+                                <span class="ml-3">6-30 minutes</span>
+                            </label>
+                            <label class="flex items-center p-3 bg-white rounded-lg border border-gray-200 cursor-pointer hover:bg-blue-50 transition">
+                                <input type="radio" name="q2" value="4" class="h-5 w-5 text-blue-500">
+                                <span class="ml-3">Within 5 minutes</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div id="question-3" class="quiz-question hidden">
+                        <p class="text-lg font-medium mb-4">3. Have you tried to quit smoking before?</p>
+                        <div class="space-y-3">
+                            <label class="flex items-center p-3 bg-white rounded-lg border border-gray-200 cursor-pointer hover:bg-blue-50 transition">
+                                <input type="radio" name="q3" value="1" class="h-5 w-5 text-blue-500">
+                                <span class="ml-3">Never tried</span>
+                            </label>
+                            <label class="flex items-center p-3 bg-white rounded-lg border border-gray-200 cursor-pointer hover:bg-blue-50 transition">
+                                <input type="radio" name="q3" value="2" class="h-5 w-5 text-blue-500">
+                                <span class="ml-3">Once</span>
+                            </label>
+                            <label class="flex items-center p-3 bg-white rounded-lg border border-gray-200 cursor-pointer hover:bg-blue-50 transition">
+                                <input type="radio" name="q3" value="3" class="h-5 w-5 text-blue-500">
+                                <span class="ml-3">2-3 times</span>
+                            </label>
+                            <label class="flex items-center p-3 bg-white rounded-lg border border-gray-200 cursor-pointer hover:bg-blue-50 transition">
+                                <input type="radio" name="q3" value="4" class="h-5 w-5 text-blue-500">
+                                <span class="ml-3">More than 3 times</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div id="results" class="hidden">
+                        <div class="bg-white rounded-lg p-6 border border-gray-200">
+                            <h4 class="text-xl font-bold mb-4">Your Dependency Level: <span id="dependency-level" class="text-blue-500"></span></h4>
+                            <p class="mb-4" id="result-description"></p>
+                            
+                            <h5 class="font-bold mb-2">Personalized Tips:</h5>
+                            <ul class="space-y-2 mb-6" id="personalized-tips">
+                            </ul>
+                            
+                            <div class="bg-green-50 p-4 rounded-lg">
+                                <p class="font-medium text-green-800">Remember: Every attempt to quit brings you closer to success. You're not alone in this journey.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 flex justify-between">
+                        <button id="prev-btn" class="hidden px-5 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">Previous</button>
+                        <button id="next-btn" class="px-5 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition" fdprocessedid="g7jx3k">Next</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="quiz-card bg-white rounded-xl shadow-md p-6">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Set a Quit Date</h3>
+                    <p class="text-gray-600">Choose a date within the next two weeks to give yourself time to prepare without losing motivation.</p>
+                </div>
+                
+                <div class="quiz-card bg-white rounded-xl shadow-md p-6">
+                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Tell People</h3>
+                    <p class="text-gray-600">Let friends and family know you're quitting so they can support you and hold you accountable.</p>
+                </div>
+                
+                <div class="quiz-card bg-white rounded-xl shadow-md p-6">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Anticipate Challenges</h3>
+                    <p class="text-gray-600">Plan ahead for situations that might trigger cravings and have strategies ready.</p>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Resources & Support Section -->
+    <section id="resources" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Resources &amp; Support</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Resource 1 -->
+                <div class="resource-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="h-3 bg-blue-500"></div>
+                    <div class="p-6">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Quit Plan Guide</h3>
+                        <p class="text-gray-600 mb-4">A step-by-step guide to creating your personalized quit plan.</p>
+                        <a href="https://www.dha.gov.ae/uploads/052023/Smoking%20guide_AR2023513895.pdf" class="text-blue-500 hover:text-blue-700 font-medium inline-flex items-center">
+                             View PDF
+                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Resource 2 -->
+                <div class="resource-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="h-3 bg-green-500"></div>
+                    <div class="p-6">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Video Series</h3>
+                        <p class="text-gray-600 mb-4">Watch this video about quitting smoking.</p>
+                        <a href="https://drive.google.com/file/d/1YoX76F2FrBA1OIWNzM_3uNBn0NIhdf35/view?usp=sharing" class="text-blue-500 hover:text-blue-700 font-medium inline-flex items-center">
+                            Watch Videos
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Resource 3 -->
+                <div class="resource-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="h-3 bg-blue-500"></div>
+                    <div class="p-6">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Campaign Poster</h3>
+                        <p class="text-gray-600 mb-4">Explore our poster , a clear call to quit smoking and breathe freely.</p>
+                        <a href="https://i.ibb.co/zWCHxZd2/Create-a-dramatic-anti-smoking-poster-for-Clear-Lungs-Show-a-cigarette-turning-into-a-ticking-time-b.jpg" class="text-blue-500 hover:text-blue-700 font-medium inline-flex items-center">
+                            View Poster
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Resource 4 -->
+                <div class="resource-card bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="h-3 bg-green-500"></div>
+                    <div class="p-6">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Helpline</h3>
+                        <p class="text-gray-600 mb-4">Speak with trained counselors who can provide guidance and support.</p>
+                        <a href="tel:16805" class="text-blue-500 hover:text-blue-700 font-medium inline-flex items-center">
+                            16805-QUIT-NOW
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join the Movement Section -->
+    <section id="join" class="py-20 bg-gradient-to-br from-blue-500 to-green-500 text-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Join the Movement</h2>
+            
+            <div class="max-w-3xl mx-auto bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
+                <div class="text-center mb-8">
+                    <div class="inline-block bg-white bg-opacity-20 rounded-full p-4 mb-4">
+                        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Take the Pledge</h3>
+                    <p class="text-white text-opacity-80">Join <span id="pledge-counter" class="font-bold">12,458</span> others who have pledged to quit smoking or stay smoke-free.</p>
+                </div>
+                
+                <form id="pledge-form" class="space-y-4">
+                    <div>
+                        <label for="name" class="block text-sm font-medium mb-1">Your Name</label>
+                        <input type="text" id="name" class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50" placeholder="Enter your name" fdprocessedid="8evz6g">
+                    </div>
+                    
+                    <div>
+                        <label for="email" class="block text-sm font-medium mb-1">Email Address</label>
+                        <input type="email" id="email" class="w-full px-4 py-2 rounded-lg bg-white bg-opacity-20 border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50" placeholder="Enter your email" fdprocessedid="qqukkj">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-1">I pledge to:</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="radio" name="pledge-type" value="quit" class="h-5 w-5 text-blue-500">
+                                <span class="ml-2">Quit smoking</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="pledge-type" value="support" class="h-5 w-5 text-blue-500">
+                                <span class="ml-2">Support someone who is quitting</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="pledge-type" value="stay" class="h-5 w-5 text-blue-500">
+                                <span class="ml-2">Stay smoke-free</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="pt-2">
+                        <button type="submit" class="w-full bg-white text-blue-500 font-bold py-3 px-6 rounded-lg hover:bg-opacity-90 transition transform hover:scale-105" fdprocessedid="gttf4i">Make My Pledge</button>
+                    </div>
+                </form>
+                
+                <div id="pledge-success" class="hidden mt-6 bg-white bg-opacity-20 rounded-lg p-4 text-center">
+                    <svg class="w-12 h-12 mx-auto text-green-300 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <h4 class="text-xl font-bold mb-1">Thank You!</h4>
+                    <p>Your pledge has been recorded. Together, we can create a smoke-free future.</p>
+                </div>
+            </div>
+            
+            
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">Our Team</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Team Member 1 -->
+                <div class="team-member bg-gray-50 rounded-xl overflow-hidden shadow-md text-center">
+                    <div class="h-40 bg-blue-100 flex items-center justify-center">
+                        <svg class="w-24 h-24 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-1">Mustafa</h3>
+                        
+                    </div>
+                </div>
+                
+                <!-- Team Member 2 -->
+                <div class="team-member bg-gray-50 rounded-xl overflow-hidden shadow-md text-center">
+                    <div class="h-40 bg-green-100 flex items-center justify-center">
+                        <svg class="w-24 h-24 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-1">Mazen</h3>
+                        
+                    </div>
+                </div>
+                
+                <!-- Team Member 3 -->
+                <div class="team-member bg-gray-50 rounded-xl overflow-hidden shadow-md text-center">
+                    <div class="h-40 bg-blue-100 flex items-center justify-center">
+                        <svg class="w-24 h-24 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-1">Abdullah</h3>
+                        
+                    </div>
+                </div>
+                
+                <!-- Team Member 4 -->
+                <div class="team-member bg-gray-50 rounded-xl overflow-hidden shadow-md text-center">
+                    <div class="h-40 bg-green-100 flex items-center justify-center">
+                        <svg class="w-24 h-24 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-1">Youssef</h3>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     
 
-    <!-- أيقونة المعلومات -->
-    <div class="info-icon" id="showCredits">
-        <i class="fas fa-info"></i>
-    </div>
-
-    <!-- نافذة التفاصيل -->
-    <div class="credits-modal">
-        <div class="credits-content">
-            <h3>معلومات المطور</h3>
-            <p>
-                تم تطوير هذا الموقع بواسطة
-                <span class="developer-name">مصطفى حازم</span>
-            </p>
-            <button class="close-btn">إغلاق</button>
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Clear Lungs</h3>
+                    <p class="text-gray-400">Empowering people to quit smoking and live healthier, longer lives.</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#why-quit" class="text-gray-400 hover:text-white transition">Why Quit?</a></li>
+                        <li><a href="#stories" class="text-gray-400 hover:text-white transition">Success Stories</a></li>
+                        <li><a href="#first-step" class="text-gray-400 hover:text-white transition">Take the First Step</a></li>
+                        <li><a href="#resources" class="text-gray-400 hover:text-white transition">Resources</a></li>
+                        <li><a href="#join" class="text-gray-400 hover:text-white transition">Join the Movement</a></li>
+                    </ul>
+                </div>
+                
+                
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Newsletter</h4>
+                    <p class="text-gray-400 mb-4">Stay updated with the latest tips and news.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email" class="px-4 py-2 rounded-l-lg w-full focus:outline-none text-gray-800" fdprocessedid="9otwd">
+                        <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-r-lg transition" fdprocessedid="l40zqo">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            
         </div>
-    </div>
+    </footer>
+
+    
+
+    
 
     <script>
-        let currentIndexToDelete = null;
-        const confirmationModal = document.querySelector('.confirmation-modal');
-        const confirmDeleteBtn = document.querySelector('.confirm-delete');
-        const cancelDeleteBtn = document.querySelector('.cancel-delete');
-
-        // دالة لعرض الأسئلة السابقة
-        function displayPreviousQuestions() {
-            const savedQuestions = JSON.parse(localStorage.getItem('questions')) || [];
-            const questionsList = document.getElementById('questionsList');
-
-            if (savedQuestions.length > 0) {
-                questionsList.innerHTML = savedQuestions.map((question, index) => `
-                    <div class="question-item" onclick="window.location.href='answer2.html?question=${encodeURIComponent(question)}'">
-                        <p class="question-text">${question}</p>
-                        <button class="delete-btn" onclick="deleteQuestion(event, ${index})">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                `).join('');
-            } else {
-                questionsList.innerHTML = `
-                    <div class="empty-state">
-                        <i class="fas fa-comment-alt"></i>
-                        <p>لا يوجد أسئلة سابقة</p>
-                    </div>`;
-            }
-        }
-
-        // دالة لعرض نافذة تأكيد الحذف
-        function showDeleteConfirmation(index) {
-            currentIndexToDelete = index;
-            document.querySelector('.confirmation-modal').classList.add('active');
-        }
-
-        // دالة لحذف سؤال بعد التأكيد
-        function confirmDelete() {
-            if (currentIndexToDelete !== null) {
-                const savedQuestions = JSON.parse(localStorage.getItem('questions')) || [];
-                savedQuestions.splice(currentIndexToDelete, 1);
-                localStorage.setItem('questions', JSON.stringify(savedQuestions));
-                displayPreviousQuestions();
-            }
-            document.querySelector('.confirmation-modal').classList.remove('active');
-        }
-
-        // دالة لإلغاء الحذف
-        function cancelDelete() {
-            document.querySelector('.confirmation-modal').classList.remove('active');
-        }
-
-        // دالة لحذف سؤال
-        function deleteQuestion(event, index) {
-            event.stopPropagation();
-            showDeleteConfirmation(index); // عرض نافذة التأكيد
-        }
-
-        confirmDeleteBtn.addEventListener('click', confirmDelete);
-        cancelDeleteBtn.addEventListener('click', cancelDelete);
-
-        // إغلاق النافذة عند النقر خارجها
-        window.addEventListener('click', (event) => {
-            if (event.target === confirmationModal) {
-                confirmationModal.classList.remove('active');
-            }
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
         });
-
-        // إضافة سؤال جديد
-        document.getElementById('askButton').addEventListener('click', function() {
-            const questionInput = document.getElementById('questionInput');
-            const question = questionInput.value.trim();
+        
+        // Quiz functionality
+        const quizContainer = document.getElementById('quiz-container');
+        const questions = document.querySelectorAll('.quiz-question');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const results = document.getElementById('results');
+        
+        let currentQuestion = 0;
+        
+        function showQuestion(questionIndex) {
+            questions.forEach((question, index) => {
+                question.classList.add('hidden');
+                if (index === questionIndex) {
+                    question.classList.remove('hidden');
+                }
+            });
             
-            if (question) {
-                // حفظ السؤال في localStorage
-                const savedQuestions = JSON.parse(localStorage.getItem('questions')) || [];
-                savedQuestions.unshift(question);
-                localStorage.setItem('questions', JSON.stringify(savedQuestions));
-                
-                // تحويل المستخدم إلى صفحة الإجابة
-                window.location.href = `answer2.html?question=${encodeURIComponent(question)}`;
+            // Update buttons
+            if (questionIndex === 0) {
+                prevBtn.classList.add('hidden');
             } else {
-                alert('الرجاء إدخال سؤال');
+                prevBtn.classList.remove('hidden');
+            }
+            
+            if (questionIndex === questions.length - 1) {
+                nextBtn.textContent = 'See Results';
+            } else {
+                nextBtn.textContent = 'Next';
+            }
+        }
+        
+        nextBtn.addEventListener('click', function() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion(currentQuestion);
+            } else {
+                // Show results
+                questions[currentQuestion].classList.add('hidden');
+                results.classList.remove('hidden');
+                nextBtn.classList.add('hidden');
+                prevBtn.classList.add('hidden');
+                
+                // Calculate results
+                calculateResults();
+            }
+        });
+        
+        prevBtn.addEventListener('click', function() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion(currentQuestion);
+            }
+        });
+        
+        function calculateResults() {
+            // Get selected values
+            const q1Value = document.querySelector('input[name="q1"]:checked')?.value || 1;
+            const q2Value = document.querySelector('input[name="q2"]:checked')?.value || 1;
+            const q3Value = document.querySelector('input[name="q3"]:checked')?.value || 1;
+            
+            // Calculate dependency level
+            const score = parseInt(q1Value) + parseInt(q2Value) + parseInt(q3Value);
+            let dependencyLevel, description, tips;
+            
+            if (score <= 4) {
+                dependencyLevel = "Low";
+                description = "You have a low nicotine dependency. This is good news! Quitting may be easier for you than for heavy smokers.";
+                tips = [
+                    "Set a quit date and stick to it",
+                    "Tell friends and family about your plan to quit",
+                    "Remove cigarettes and other tobacco products from your home and car",
+                    "Stay busy with activities that keep your hands and mind occupied"
+                ];
+            } else if (score <= 8) {
+                dependencyLevel = "Moderate";
+                description = "You have a moderate nicotine dependency. You may experience withdrawal symptoms when quitting, but with the right strategy, you can overcome them.";
+                tips = [
+                    "Consider nicotine replacement therapy like patches or gum",
+                    "Identify your smoking triggers and plan alternatives",
+                    "Practice stress management techniques like deep breathing",
+                    "Join a support group or find a quit buddy"
+                ];
+            } else {
+                dependencyLevel = "High";
+                description = "You have a high nicotine dependency. Quitting may be challenging, but with proper support and resources, you can succeed.";
+                tips = [
+                    "Consult with a healthcare provider about prescription medications",
+                    "Consider combining nicotine replacement therapies",
+                    "Gradually reduce your cigarette consumption before quitting",
+                    "Seek professional counseling or join an intensive support program"
+                ];
+            }
+            
+            // Update results
+            document.getElementById('dependency-level').textContent = dependencyLevel;
+            document.getElementById('result-description').textContent = description;
+            
+            const tipsList = document.getElementById('personalized-tips');
+            tipsList.innerHTML = '';
+            tips.forEach(tip => {
+                const li = document.createElement('li');
+                li.className = 'flex items-start';
+                li.innerHTML = `
+                    <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>${tip}</span>
+                `;
+                tipsList.appendChild(li);
+            });
+        }
+        
+        // Initialize quiz
+        showQuestion(currentQuestion);
+        
+        // Pledge form functionality
+        document.getElementById('pledge-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simple validation
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const pledgeType = document.querySelector('input[name="pledge-type"]:checked');
+            
+            if (name && email && pledgeType) {
+                // Show success message
+                document.getElementById('pledge-form').classList.add('hidden');
+                document.getElementById('pledge-success').classList.remove('hidden');
+                
+                // Update counter (for demo purposes)
+                const counter = document.getElementById('pledge-counter');
+                const currentCount = parseInt(counter.textContent.replace(',', ''));
+                counter.textContent = (currentCount + 1).toLocaleString();
+                counter.classList.add('counter-animation');
             }
         });
 
-        // عرض الأسئلة السابقة عند تحميل الصفحة
-        displayPreviousQuestions();
+        
 
-        // إظهار نافذة التفاصيل
-        const creditsModal = document.querySelector('.credits-modal');
-        const showCreditsBtn = document.getElementById('showCredits');
-        const closeCreditsBtn = document.querySelector('.close-btn');
+        
 
-        showCreditsBtn.addEventListener('click', () => {
-            creditsModal.classList.add('active');
-        });
-
-        closeCreditsBtn.addEventListener('click', () => {
-            creditsModal.classList.remove('active');
-        });
-
-        window.addEventListener('click', (event) => {
-            if (event.target === creditsModal) {
-                creditsModal.classList.remove('active');
-            }
-        });
+        // Copy code to clipboard
+        
     </script>
-</body>
-</html>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'95ffe9801134e289',t:'MTc1MjY1MjI2Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border: none; visibility: hidden;"></iframe>
+
+<span id="PING_IFRAME_FORM_DETECTION" style="display: none;"></span></body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
